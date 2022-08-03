@@ -65,11 +65,34 @@ function playRound(playerSelection, computerSelection) {
 
 // main game loop
 function game() {
-    let playerWins, computerWins = 0;
+    let playerWins = 0;
+    let computerWins = 0;
     console.log("Let's play . . . ROCK PAPER SCISSORS!! *organic applause*");
     
     for (let i = 0; i < 5; i++) {
         let playerSelection = prompt("Enter your choice (rock, paper, or scissors): ").toLowerCase();
+        switch(playRound(playerSelection, getComputerChoice())) {
+            case 0:
+                computerWins += 1;
+                break;
+            case 1:
+                playerWins += 1;
+                break;
+            case 2:
+                i -= 1;
+                break;
+            default:
+                console.log("Invalid choice, please try again.");
+                i -= 1;
+                break;
+        }
         
+    }
+    
+    console.log(computerWins, playerWins);
+    if (computerWins > playerWins) {
+        console.log(`Computer Wins! Final score: ${computerWins}:${playerWins}`);
+    } else if (playerWins > computerWins) {
+        console.log(`You Win! Final score: ${playerWins}:${computerWins}`);
     }
 }
